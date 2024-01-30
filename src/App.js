@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Suspense, useEffect, useState } from "react";
+import "./App.css";
+import authservice from "./appwrite/auth";
+import { useDispatch } from "react-redux";
+import { login, logout } from "./store/authSlice";
+import { Footer, Header, Loader } from "./components/index";
+import { Outlet } from "react-router-dom";
 function App() {
-  return (
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setLoading(true);
+    authservice
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+  return loading ? (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Loader />
+    </div>
+  ) : (
+    // ):<div className='container'>
+    <div>
+      <div className="container">
+        <Suspense fallback={<Loader />}>
+          <Header />
+          <Outlet />
+        </Suspense>
+      </div>
+      {/* <Footer/> */}
     </div>
   );
+  // return (
+  //   <div>
+  //     <Header/>
+  //   </div>
+  // )
 }
 
 export default App;
