@@ -54,9 +54,9 @@ function Header() {
     <Container>
     <nav className={`navbar navbar-expand-lg border-bottom p-0 `}>
       <div className="container-fluid p-0">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" style={{fontWeight:"700"}} to="/">
           {/* <Logo/> */}
-          Melody Keys
+          Ink & Insights
         </Link>
         <button
           className="navbar-toggler"

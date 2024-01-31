@@ -1,5 +1,6 @@
 import { Client, Databases, Query, ID, Storage } from "appwrite";
 import config from "../config/config";
+import { ToastContainer, toast } from "react-toastify";
 
 class Service {
     client = new Client();
@@ -24,6 +25,7 @@ class Service {
             })
         } catch (error) {
             console.log("Appwrite console :: createPost :: ",error);
+            throw  new Error(error.message)
         }
     }
     async updatePost(slug,{title, content, featuredImage, status}){
@@ -37,6 +39,7 @@ class Service {
             })
         } catch (error) {
             console.log("Appwrite console :: updatePost :: ",error);
+            throw  new Error(error.message)
         }
     }
     async getPost(slug){
@@ -61,6 +64,7 @@ class Service {
             return await this.databases.listDocuments(config.appwriteDatabaseId,config.appwriteCollectionId,queries)
         } catch (error) {
             console.log("Appwrite console :: getPosts :: ",error);
+            // throw  new Error(error.message)
             return false;
         }
     }

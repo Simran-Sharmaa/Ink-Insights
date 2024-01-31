@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { Button, Input, Select } from "../index";
-import { ErrorMessage } from "@hookform/error-message";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function PostForm({ post }) {
@@ -63,9 +62,8 @@ function PostForm({ post }) {
             userId: userData.userData.$id,
           });
         }
-
         if (dbPost) {
-          toast.success("🦄 Wow so easy!", {
+          toast.success("The data has been updated successfully!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -79,7 +77,6 @@ function PostForm({ post }) {
         }
       }
     } catch (error) {
-      console.log("Error during form submission", error.message);
       toast.error(error.message, {
         position: "top-right",
         autoClose: 5000,
@@ -91,6 +88,7 @@ function PostForm({ post }) {
         theme: "colored",
         // transition: Bounce,
         });
+      console.log("Error during form submission", error.message);
     }
   };
   const transformSlug = useCallback((value) => {

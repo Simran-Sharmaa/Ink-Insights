@@ -34,7 +34,7 @@ function Post() {
     <div>
       <Container>
         <div className="d-flex justify-content-between">
-          <img
+          <img className="mb-3"
             style={{ aspectRatio: "4/3", height: "20rem", objectFit: "cover" }}
             src={dbStore.getFilePreview(post.featuredImage)}
             alt={post.title}
@@ -70,7 +70,7 @@ function Post() {
 
         </div>
 
-        <h2>{post.title}</h2>
+        <h2 className="text-capitalize mb-3">{post.title}</h2>
         <div>{parse(post.content)}</div>
       </Container>
     </div>

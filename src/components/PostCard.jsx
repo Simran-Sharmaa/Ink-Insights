@@ -10,9 +10,8 @@ function PostCard({ $id, title, featuredImage }) {
     <div className="card">
       <img
         src={service.getFilePreview(featuredImage)}
-        className="card-img-top h-100"
+        className="card-img-top h-100 border-bottom "
         alt={title}
-        // style={{ objectFit: "cover" }}
         style={{  aspectRatio: "1/1" , objectFit: "cover" }}
       />
       <div className="card-body">
