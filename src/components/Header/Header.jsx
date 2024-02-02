@@ -13,7 +13,8 @@ function Header() {
   const isDarkMode = useSelector((state)=>state.theme.isDarkMode)
   
   useEffect(()=>{
-    if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
+    // if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
+    if (!isDarkMode) {
       document.documentElement.setAttribute('data-bs-theme','light')
   }
   else {
