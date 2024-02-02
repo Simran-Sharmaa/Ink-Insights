@@ -12,11 +12,11 @@ function Register() {
   const [error, setError] = useState(null);
   const onSubmit = async (data) => {
     try {
-      const userData = authservice.createAccount(data);
-      if (userData) {
-        const user = authservice.getCurrentUser();
-        dispatch(login(user));
-        navigate("/");
+      const createdUser = await authservice.createAccount(data);
+      if (createdUser) {
+        const userData = await authservice.getCurrentUser();
+        dispatch(login({userData}));
+        navigate("/login");
       }
     } catch (error) {
       setError(error.message);
